@@ -5,6 +5,19 @@ public class Radio {
 
     private int currentStation;
     private int currentVolume;
+    private int minStation;
+    private int maxStation;
+    private int stationsCount;
+    private int minVolume = 0;
+    private int maxVolume = 100;
+
+
+    public Radio(int stationsCount) {
+        maxStation = stationsCount - 1;
+    }
+    public Radio () {
+        maxStation = 9;
+    }
 
     public int getCurrentStation() {
 
@@ -12,36 +25,36 @@ public class Radio {
     }
 
     public void setCurrentStation(int newCurrentStation) {
-        if (newCurrentStation < 0) {
+        if (newCurrentStation < minStation) {
             return;
         }
-        if (newCurrentStation > 9) {
+        if (newCurrentStation > maxStation) {
             return;
         }
         currentStation = newCurrentStation;
     }
 
     public void next() {
-        if (currentStation < 9) {
+        if (currentStation < maxStation) {
             currentStation++;
         } else {
-            currentStation = 0;
+            currentStation = minStation;
         }
     }
 
     public void prev() {
-        if (currentStation > 0) {
+        if (currentStation > minStation) {
             currentStation--;
         } else {
-            currentStation = 9;
+            currentStation = maxStation;
         }
     }
 
     public void setCurrentVolume(int newCurrentVolume) {
-        if (newCurrentVolume > 10) {
+        if (newCurrentVolume > maxVolume) {
             return;
         }
-        if (newCurrentVolume < 0) {
+        if (newCurrentVolume < minVolume) {
             return;
         }
         currentVolume = newCurrentVolume;
@@ -53,7 +66,7 @@ public class Radio {
     }
 
     public void increaseVolume() {
-        if (currentVolume < 10) {
+        if (currentVolume < maxVolume) {
             currentVolume++;
         } else {
             return;
@@ -61,7 +74,7 @@ public class Radio {
     }
 
     public void decreaseVolume() {
-        if (currentVolume > 0) {
+        if (currentVolume > minVolume) {
             currentVolume--;
         } else {
             return;
